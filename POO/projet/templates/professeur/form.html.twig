@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur form{% endblock %}
+
+
+{% block content %}
+
+<div class="table-responsive p-0">
+    <div class="row vh-90 bg-secondary rounded align-items-center justify-content-center mx-0"></div>
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4" >
+            <h6 class="mb-4 easion-card-title">Enregistrement de Professeur</h6>
+            <div class="card-body ">
+                {{form_start(form)}}
+                
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

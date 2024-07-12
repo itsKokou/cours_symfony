@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Secteur{% endblock %}
+
+{% block content %}
+    <div class="w-1/2 mb-4 flex mt-3 rounded-lg px-4 py-3 mt-4 text-gray-500 border">
+        <div style="width: 40%; margin-right: 8%;" class="text-base px-4 py-3 border border-gray-300 rounded-md">
+          <label for="direction-change" class="block mb-2 font-medium text-gray-900 dark:text-white">Direction</label>
+          <select id="direction-change" style="width:80%;" class="bg-gray-50 dark:bg-white border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option data-path="{{path('app_secteur_filtre_direction',{idD:0})}}" value='0' >All</option>
+            {% for item in directions %}
+              <option data-path="{{path('app_secteur_filtre_direction',{idD:item.id})}}"
+              {% if selectedValue['direction'] is defined and selectedValue['direction']== item.id %}selected{% endif %}
+              value="{{item.id}}">{{item.name}}</option>  
+            {% endfor %}
+          </select>
+        </div>
+        <div style="width: 40%;" class="text-base px-4 py-3 border border-gray-300 rounded-md dark:bg-zinc-600">
+          <label for="agent-change" class="block mb-2 font-medium text-gray-900 dark:text-white">Agent </label>
+          <select id="agent-change" style="width:80%;" class="bg-gray-50 dark:bg-white border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option data-path="{{path('app_secteur_filtre_agent',{idA:0})}}" value='0' >All</option>
+            {% for item in agents %}
+              <option data-path="{{path('app_secteur_filtre_agent',{idA:item.id})}}"
+              {% if selectedValue['agent'] is defined and selectedValue['agent']== item.id %}selected{% endif %}
+              value="{{item.id}}">{{item.nomComplet}}</option>  
+            {% endfor %}
+          </select>
+        </div>
+    </div>
+    <div class="w-1/2 flex mt-3 rounded-lg px-4 py-3 mt-4 text-gray-500 border">
+        <div class=" w-full mt-2">
+            <p class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i> Liste des Secteurs
+            </p>
+            <div class="bg-white overflow-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">N°</th>
+                            <th class="text-left px-4 uppercase font-semibold text-sm">Nom</th>
+                            <th class="text-left px-4 uppercase font-semibold text-sm">Direction</th>
+                            <th class="text-left px-4 uppercase font-semibold text-sm">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        {% for item in secteurs %}
+                            <tr {% if item.id % 2 ==0  %} class="bg-gray-200" {% endif %} >
+                                <td class="text-left py-3 px-4">{{item.id}}</td>
+                                <td class="text-left px-4">{{item.name}}</td>
+                                <td class="text-left px-4">{{item.direction.name}}</td>
+                                <td class="text-left px-4">
+                                    <a href="{{path('app_secteur_agents',{id:item.id})}}">
+                                        <button 
+                                            class="text-cyan-600 hover:bg-white border rounded-md border-white flex items-center justify-between px-2 py-2 text-sm font-medium leading-5"
+                                            aria-label="Delete"
+                                        >
+                                            <svg
+                                                class="w-5 h-5"
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                fill-rule="evenodd"
+                                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                                clip-rule="evenodd"
+                                                ></path>
+                                            </svg>Agents
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {# LE MODAL #}
+    {% if htmlAgent is defined and htmlAgent is not null %} 
+        <div id="liste-agents" class=" hidden w-full">
+            {{htmlAgent|raw}}
+        </div>
+    {% endif %} 
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        const selectDirection =document.querySelector('#direction-change');
+        getData(selectDirection);
+        const selectAgent =document.querySelector('#agent-change');
+        getData(selectAgent);
+    </script>
+
+    {% if htmlAgent is defined and htmlAgent is not null %} 
+        <script>
+            const detailAgent = document.querySelector("#liste-agents");
+            detailAgent.classList.remove("hidden");
+            Swal.fire({
+                html: detailAgent,
+                confirmButtonText: 'Fermer'
+            })
+        </script>
+    {% endif %}
+    
+{% endblock %}

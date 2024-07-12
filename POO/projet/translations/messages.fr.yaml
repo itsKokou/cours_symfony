@@ -1,0 +1,11 @@
+
+module :
+  notblank : Ce champ est obligatoire
+  unique : Ce champ doit etre unique
+
+professeur : 
+  notblank : Ce champ est obligatoire
+  unique : Ce champ doit etre unique
+  email :
+    notblank : L'email est obligatoire
+    unique : L’email doit etre unique

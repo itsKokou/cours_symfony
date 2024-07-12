@@ -1,0 +1,26 @@
+Taf : 
+    - Professeur : - KPA
+                   - Voir Details(Modules ou classes) Ce sera un modal
+On peut utiliser celui de bootstraop : son body doit être vide. on le fait avec Js et au moment ou on click le modal se crée
+    -Inscription : 
+		- Annee Scolaire 
+                - Js()
+                - Filtre(JS)
+    - Réinscription (JS)
+    - Filtre (JS)
+    - Select 2*??
+
+    - Le form du User(Ac/RP) auront le rôle en select : ecrire une requete qui part récuperer tout les rôles sauf Prof_Role et Etu_Role
+
+Pour Moi: 
+   Saisie année scolaire demander année debut puis second input en lecture, année suivante JS.
+
+Voir absence sur une autre page 
+
+Request synchrone = button 
+Resquest Asynchone = Js; et tester si assynchrone car symfony ne le connaît pas
+
+
+
+======================================
+Pour les select, utiliser le 2 pour choisir classe il commence à taper le nom et il sort la liste des classes qui ont les élements 

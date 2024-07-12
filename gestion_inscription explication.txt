@@ -1,0 +1,47 @@
+Lundi -  samedi: Pour planifier cours 
+
+Prof: affectation de classe et module se fait par annéé scolaire Encours
+
+Réinscription : même form que inscription, en inscription le mat pas visible 
+
+-visible en réinscription : suite à la saisi du matricule, toute les données de l'étudiant sont chargé
+-generer matricule: pas plus de 10 caractere
+-sur inscript y'a absence et dossier 
+-mettre photo sur etudiant 
+-click sur dossier: on a photo et information, classe actuelle puis ensemble de ses inscription 
+
+======Planification de cours 
+-cours : module, prof, classes, heureGlobal, heureRestAPlanifier, heurePlanifié,heureRéalisé
+-sessions : type cours(presentiel ou ligne),heureD(8-17), heureF(11-20) minimun 3 heure max 4 par session. Si heureF>=18, automatique cours en ligne
+            -Lister les cours des semestres en cours/ filtre: classe(filtre multiple(cours en commun)), niveau, semestre:   
+            -si presentiel, la salle 
+            - si en ligne, le code
+            -Verifier disponibilite des ressources 
+-Planification de cours depasse pas heure Globale
+-Creer fixture pour remplir toute les salles
+
+-semestre sont rattachés au niveau, et mettre le semestre en cours
+
+*****Fonctionnalités
+-(RP)Planifier un cours :=> - save cours(année scolaire en cours, semestre)
+                        -Archiver un cours : si on archive le cours, puis toutes ses sessions ne sont plus visibles
+                        -Modifier nbreHeureG, classes 
+
+-(RP)Plannifier session : 
+	-Enregistrer la session: on peut changer de prof mais choisir un prof qui peut enseigner ce module dans cette année. ce prof est que pour la session
+	-(AC)Lister session cours(faire un calendar[plugin, le mettre en français] comme agenda mais les session de cours de la journée)/ filter : date, classe(multiple), niveau, semestre
+         -(AC)Valider la session(nbreHeure)
+
+-(AC)Absence : 
+	- marquer absences dans une session(calendar)( liste des etu) dans le semestre en cours a la fin de la session 
+	-Visualiser les absences d'un etu dans un semestre
+
+-(Etu)  -Liste de ses sessions de cours(calen)/ filtre : date, mmodule  
+	-Click sur session pour declarer une absence avant debut session  
+
+-(Prof) - Liste de ses sessions de cours de la semaine(calen)/ filtre : date, classe
+	-Declarer une absence avant debut session ou après. Dans ce cas, la session est annulé donc heurePlanifié diminue suivant l'horaire
+
+============================================================
+
+

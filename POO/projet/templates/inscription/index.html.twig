@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+    <div class="table-responsive p-0 pb-3">
+        <div class="row vh-90 bg-secondary rounded align-items-center justify-content-center mx-0"></div>
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="" style="margin: -15px 0px; ">
+                 <span style="margin-left:85%;"><a class="btn btn-outline-info m-2 " href="{{path('app_inscription_save')}}"> Nouveau </a></span>
+                </div>
+                <div class="card-body" style="margin: -5px;">
+                    {{form_start(form)}}
+                    <div class="form-control rounded bg-light text-white" style="max-width: 30%; margin:0% 0px 0px 0px">
+                      <label for="">{{form_label(form.Classe)}}</label>
+                        {{form_widget(form.Classe)}}
+                    </div>
+                    <div class="input-group-append" style="margin:-88px 200px 60px 0px">
+                      {{form_widget(form.save)}}
+                    </div>
+                    {{form_end(form)}}
+                </div>
+                <h6 class="mb-2">Liste des Inscrits de {{ app.session.get("anneeEncours").libelle }}</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ knp_pagination_sortable(pagination, 'N°', 'i.id') }}</th>
+                                <th scope="col" {% if pagination.isSorted('i.createAt') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Date', 'i.createAt') }}
+                                </th>
+                                <th scope="col" {% if pagination.isSorted('e.nomComplet') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Etudiant', 'e.nomComplet') }}
+                                </th>
+                                <th scope="col" {% if pagination.isSorted('e.email') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Email', 'e.email') }}
+                                </th>
+                                <th{% if pagination.isSorted('c.libelle') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Classe', 'c.libelle') }}
+                                </th>
+                                <th scope="col">Actions</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for inscription in pagination %}
+                            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                <th scope="row">{{inscription.id}}</th>
+                                <td>{{inscription.createAt|date("d/m/Y")}}</td>
+                                <td>{{inscription.etudiant.nomComplet}}</td>
+                                <td>{{inscription.etudiant.email}}</td>
+                                <td>{{inscription.classe.libelle}}</td>
+                                <td><a class="btn btn-outline-warning" style="padding: 2px 12px;" href="{{path('app_inscription_save',{id:inscription.id})}}">Voir Absences</a></td>
+                                <td><a class="btn btn-outline-danger" style="padding: 2px 12px;" href="{{path('app_inscription',{id:inscription.id})}}">Annuler</a></td>  
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="navigation">
+                  {{ knp_pagination_render(pagination) }}
+                </div>        
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        const select =document.querySelector('#filtre_inscription_Classe');
+        select.addEventListener("change",function(event){
+            dd("ok")
+            fetch("{{ path('app_inscription') }}",{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json' 
+                }
+            })
+            .then(response => response.json())
+            .then(url => {
+                window.location.href=url;
+            })
+            .catch(err => console.log(err))
+        });
+    </script>
+{% endblock %}

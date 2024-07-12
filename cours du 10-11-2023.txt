@@ -1,0 +1,41 @@
+Taf pour prochain cours: 
+ - Professeur :
+   - ajout prof
+   - affecter classe
+   - affecter modules 
+   - lister + pagination 
+   - recherche par classe, module
+   - Pagination de Recherche : knp
+   - Preview et Next
+
+   - Mettre que les fonctionnalités de l'appli sur le menu
+   - faire filtre auto sur prof & manuel sur classe
+   - Générer le form de filtre par template (Form=>Formtype)
+   - Le tri : knp 
+   - Filtre classe / module 
+   - Form Ajout : - Grade = select (on peut le fixer)
+                  - Modules et classes checkbox
+
+=======================FORM====================
+Un champ non mappé n'est pas géré par symfony. Les champs qui existent sur le form mais paas sur l'entity. 
+
+ChoiceType == Pour les string select 
+EntityType == pour les select des objets tels que les relations
+
+ChoiceType avec expanded à true == radio 
+ChoiceType avec mutiple à true == checkbox 
+
+Pour recuperer les elements non mappé on fait les getters sur l'objet form
+
+=====================VALIDATION==============
+Se fait sur entity si l'entity sera utiliser dans plusieurs technologie
+
+se fait sur le form pour les attributs non mappé.
+
+NB: Dans le projet, les messages ne seront pas dans le form; creer un fichier translation pour contenir les messages de validation
+
+La validation de l'unicité d'entité se fait sur l'objet
+
+
+knp paginator bundle = pour la pagination 
+

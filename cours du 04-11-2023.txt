@@ -1,0 +1,44 @@
+Taf pour prochain cours: 
+ - Professeur :
+   - ajout prof
+   - affecter classe
+   - affecter modules 
+   - lister + pagination 
+   - recherche par classe, module
+   - Pagination de Recherche
+   - Preview et Next
+   - Mettre que les fonctionnalités de l'appli sur le menu
+
+NB : Utiliser tailwind CSS pour les templates (pas bootstrap) 
+
+
+Dans composer.json, on peut creer d'autre commande qui vont nous permettre d'automatiser beaucoup de choses.
+
+INFO: dependance bcrypt pour crypter les mdp
+
+# Authentification 
+ -stateless (eager) : chaq requete est authentifiée, il te verifie a chaq fois
+ -statefull (Lazy) : se fait une seule fois et te garde comme id_session
+
+La dependance twig : moteur de template (vue)
+  C'est une dependance qui gère les vues, facilites la gestion des vues par des methodes predefini
+
+Un controller => request-response 
+
+uri : uniform resource indicator
+
+form themes symfony : classes pour mettre en forme nos formulaires en fonctions de ces themes
+
+{{$var}} : afficher une variable (les moustaches)
+{% expression %} : lancer l'action 
+
+================================ Templates =======================
+Un block est une zone de la page parent susceptible de changer dans les pages filles.
+
+installer twig pack 
+installer twig language
+
+Telecharger le template 
+integrer 
+
+charger le css, le js avec une fonction de twig : asset()

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professeur{% endblock %}
+
+
+{% block content %}
+  <div class="table-responsive p-0 pb-3">
+    <div class="row vh-90 bg-secondary rounded align-items-center justify-content-center mx-0"></div>
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="" style="margin: -15px 0px; ">
+                 <span style="margin-left:85%;"><a class="btn btn-outline-info m-2 " href="{{path('app_professeur_save')}}"> Nouveau </a></span>
+                </div>
+                <div class="card-body" style="margin: -5px;">
+                    {{form_start(form)}}
+                    <div class="form-control rounded bg-light text-white" style="max-width: 30%; margin:0% 0px 0px 0px">
+                      <label for="">{{form_label(form.Classe)}}</label>
+                        {{form_widget(form.Classe)}}
+                    </div>
+                    <div class="form-control rounded bg-light text-white" style="max-width: 30%; margin:-9.7% 0px 0px 34%">
+                      <label for="">{{form_label(form.Module)}}</label>
+                        {{form_widget(form.Module)}}
+                    </div>
+                    <div class="input-group-append" style="margin:-88px 200px 60px 0px">
+                      {{form_widget(form.save)}}
+                    </div>
+                    {{form_end(form)}}
+                </div>
+                <h6 class="mb-2">Liste des Professeurs</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ knp_pagination_sortable(pagination, 'N°', 'p.id') }}</th>
+                                <th scope="col" {% if pagination.isSorted('p.nomComplet') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Nom et Prénoms', 'p.nomComplet') }}
+                                </th>
+                                <th scope="col" {% if pagination.isSorted('p.grade') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Grade', 'p.grade') }}
+                                </th>
+                                <th{% if pagination.isSorted('p.email') %} class="sorted"{% endif %}>
+                                  {{ knp_pagination_sortable(pagination, 'Email', 'p.email') }}
+                                </th>
+                                <th scope="col">Action</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for prof in pagination %}
+                            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                <th scope="row">{{prof.id}}</th>
+                                <td>{{prof.nomComplet}}</td>
+                                <td>{{prof.grade}}</td>
+                                <td>{{prof.email}}</td>
+                                <td><a class="btn btn-outline-warning" style="padding: 2px 12px;" href="{{path('app_professeur_save',{id:prof.id})}}">Edit</a></td>
+                                <td><a class="btn btn-info" style="padding: 2px 12px;" href="{{path('app_professeur',{id:prof.id})}}">Details</a></td>  
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="navigation">
+                  {{ knp_pagination_render(pagination) }}
+                </div>        
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

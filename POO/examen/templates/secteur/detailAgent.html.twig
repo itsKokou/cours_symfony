@@ -1,0 +1,26 @@
+
+    <div class="w-full flex mt-3 rounded-lg px-4 py-3 mt-4 text-gray-500 border">
+        <div class=" w-full mt-2">
+            <p class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i> Liste des Agents du secteur {{secteur.name}}
+            </p>
+            <div class="bg-white overflow-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">N°</th>
+                            <th class="text-left px-4 uppercase font-semibold text-sm">Nom Complet</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        {% for item in agents %}
+                            <tr {% if item.id % 2 ==0  %} class="bg-gray-200" {% endif %} >
+                                <td class="text-left py-3 px-4">{{item.id}}</td>
+                                <td class="text-left px-4">{{item.nomComplet}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
